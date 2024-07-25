@@ -1,12 +1,16 @@
 import { LoginButton } from "@/components/Auth/LoginButton";
 import { Logo } from "./Logo";
+import { getUser } from "@/actions/users";
+import AccountMenu from "./AccountMenu";
 
-export const Header = () => {
+export const Header = async () => {
+  const { errorMessage, user } = await getUser();
+
   return (
     <header className="w-full shadow-sm p-4 md:p-5">
       <div className="max-w-5xl mx-auto flex justify-between gap-4">
         <Logo />
-        <LoginButton />
+        {!user ? <LoginButton /> : <AccountMenu user={user} />}
       </div>
     </header>
   );

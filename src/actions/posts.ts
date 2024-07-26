@@ -14,9 +14,8 @@ export const getAllPosts = async () => {
 
     const { data, error } = await supabase
       .from("posts")
-      .select(
-        "id, content, created_at, author: profiles(username, avatar_url)"
-      );
+      .select("id, content, created_at, author: profiles(username, avatar_url)")
+      .order("created_at", { ascending: false });
 
     if (error) {
       return { errorMessage: error.message, data: [] };

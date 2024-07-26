@@ -26,15 +26,8 @@ export default function PostsProvider({ children }: { children: ReactNode }) {
   const handleLoadAllPosts = () => {
     startTransition(async () => {
       const { errorMessage, data } = await getAllPosts();
-      setPosts(orderPostByMostRecent(data as Post[]));
+      setPosts(data as Post[]);
     });
-  };
-
-  const orderPostByMostRecent = (newPosts: Post[]) => {
-    const orderedPosts = newPosts.sort(
-      (a, b) => Number(new Date(b.created_at)) - Number(new Date(a.created_at))
-    );
-    return orderedPosts;
   };
 
   const handleCreatePost = (newPostContent: string) => {

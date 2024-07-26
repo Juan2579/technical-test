@@ -1,11 +1,14 @@
 "use client";
 
+import { useTransition } from "react";
+import { useRouter } from "next/navigation";
+
+import { loginAction } from "@/actions/users";
+import { Provider } from "@supabase/supabase-js";
+
 import { Button } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { useTransition } from "react";
-import { Provider } from "@supabase/supabase-js";
-import { loginAction } from "@/actions/users";
-import { useRouter } from "next/navigation";
+
 import { Loader } from "../Shared/Loader";
 
 export const LoginButton = () => {
@@ -15,8 +18,6 @@ export const LoginButton = () => {
   const handleClickLoginButton = (provider: Provider) => {
     startTransition(async () => {
       const { errorMessage, url } = await loginAction(provider);
-
-      console.log(errorMessage, url);
 
       if (!errorMessage && url) {
         router.push(url);

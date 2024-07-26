@@ -2,7 +2,6 @@
 
 import { MouseEvent, useState, useTransition } from "react";
 import Box from "@mui/material/Box";
-import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -12,6 +11,7 @@ import Logout from "@mui/icons-material/Logout";
 import { User } from "@supabase/auth-js";
 import { logoutAction } from "@/actions/users";
 import { Loader } from "./Loader";
+import { ProfileAvatar } from "./ProfileAvatar";
 
 export default function AccountMenu({ user }: { user: User }) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -52,20 +52,10 @@ export default function AccountMenu({ user }: { user: User }) {
             size="small"
             sx={{ ml: 2 }}
           >
-            {user.user_metadata["avatar_url"] ? (
-              <Avatar
-                sx={{ width: 48, height: 48 }}
-                src={user.user_metadata["avatar_url"]}
-                alt={`${user.user_metadata["user_name"]} avatar`}
-              />
-            ) : (
-              <Avatar
-                className="bg-primary text-white"
-                sx={{ width: 48, height: 48 }}
-              >
-                {user.user_metadata["user_name"].charAt(0).toUpperCase()}
-              </Avatar>
-            )}
+            <ProfileAvatar
+              username={user.user_metadata["user_name"]}
+              avatarUrl={user.user_metadata["avatar_url"]}
+            />
           </IconButton>
         </Tooltip>
       </Box>

@@ -1,6 +1,7 @@
+import { getUser } from "@/actions/users";
+
 import { LoginButton } from "@/components/Auth/LoginButton";
 import { Logo } from "./Logo";
-import { getUser } from "@/actions/users";
 import AccountMenu from "./AccountMenu";
 
 export const Header = async () => {

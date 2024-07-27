@@ -35,6 +35,7 @@ export const CommentsModal = ({
 
   return (
     <Dialog
+      sx={{ zIndex: "100 !important" }}
       fullScreen={isMobile}
       open={open}
       onClose={handleClose}

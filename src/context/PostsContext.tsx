@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useState,
-  useTransition,
-} from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 import { createComment } from "@/actions/comments";
 import { createPost, getAllPosts } from "@/actions/posts";
@@ -25,27 +19,24 @@ export const PostsContext = createContext<PostsContextType | null>(null);
 
 export default function PostsProvider({ children }: { children: ReactNode }) {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [isLoading, startTransition] = useTransition();
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleLoadAllPosts = () => {
-    startTransition(async () => {
-      const { errorMessage, data } = await getAllPosts();
-      setPosts(data as Post[]);
-    });
+  const handleLoadAllPosts = async () => {
+    const { errorMessage, data } = await getAllPosts();
+    setPosts(data as Post[]);
+    setIsLoading(false);
   };
 
-  const handleCreatePost = (newPostContent: string) => {
-    startTransition(async () => {
-      const { errorMessage } = await createPost(newPostContent);
-      handleLoadAllPosts();
-    });
+  const handleCreatePost = async (newPostContent: string) => {
+    setIsLoading(true);
+    const { errorMessage } = await createPost(newPostContent);
+    handleLoadAllPosts();
   };
 
-  const handleCreateComment = (idPost: number, content: string) => {
-    startTransition(async () => {
-      const { errorMessage } = await createComment(idPost, content);
-      handleLoadAllPosts();
-    });
+  const handleCreateComment = async (idPost: number, content: string) => {
+    setIsLoading(true);
+    const { errorMessage } = await createComment(idPost, content);
+    handleLoadAllPosts();
   };
 
   return (

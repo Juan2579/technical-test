@@ -2,11 +2,14 @@
 
 import { useEffect } from "react";
 import { usePosts } from "@/context/PostsContext";
+
+import { User } from "@supabase/auth-js";
+
 import { PostCard } from "./PostCard";
 import { PostSkeleton } from "./PostSkeleton";
 import { PostsEmpty } from "./PostsEmpty";
 
-export const PostsList = () => {
+export const PostsList = ({ user }: { user?: User }) => {
   const { posts, isLoading, handleLoadAllPosts } = usePosts();
 
   useEffect(() => {
@@ -22,7 +25,7 @@ export const PostsList = () => {
       {!isLoading ? (
         <div className="w-full flex flex-col">
           {posts.map((post) => (
-            <PostCard key={post.id} post={post} />
+            <PostCard key={post.id} post={post} user={user} />
           ))}
         </div>
       ) : (

@@ -1,10 +1,9 @@
 import { Author } from "./Author";
-import { Comment } from "./Comment";
 
-export interface Post {
+export interface Comment {
   id: number;
   content: string;
   created_at: string;
   author: Author;
-  comments: Comment[];
+  post_id: number;
 }

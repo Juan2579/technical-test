@@ -9,7 +9,7 @@ export default async function Home() {
   return (
     <main className="w-full mx-auto max-w-xl flex flex-col justify-center items-center shadow-sm border">
       {user && <PostForm user={user} />}
-      <PostsList />
+      <PostsList user={user} />
     </main>
   );
 }

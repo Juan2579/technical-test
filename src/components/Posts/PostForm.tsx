@@ -28,7 +28,7 @@ export const PostForm = ({ user }: { user: User }) => {
           avatarUrl={user.user_metadata["avatar_url"]}
         />
         <TextField
-          label="What's your super idea for today?"
+          placeholder="What's your super idea for today?"
           variant="outlined"
           fullWidth
           multiline

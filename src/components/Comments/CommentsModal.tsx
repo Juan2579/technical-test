@@ -36,6 +36,12 @@ export const CommentsModal = ({
   return (
     <Dialog
       sx={{ zIndex: "100 !important" }}
+      PaperProps={{
+        style: {
+          minWidth: !isMobile ? "580px" : "",
+          maxWidth: "580px",
+        },
+      }}
       fullScreen={isMobile}
       open={open}
       onClose={handleClose}

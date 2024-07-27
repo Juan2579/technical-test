@@ -16,7 +16,7 @@ const CommentCard = ({ comment }: { comment: Comment }) => {
           <span className="font-bold">{comment.author.username}</span>
           <span className="text-sm">{getPostedDate(comment.created_at)}</span>
         </div>
-        <span>{comment.content}</span>
+        <span className="break-all">{comment.content}</span>
       </div>
     </div>
   );

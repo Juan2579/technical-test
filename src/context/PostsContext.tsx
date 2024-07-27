@@ -1,8 +1,6 @@
 "use client";
 
-import { createPost, getAllPosts } from "@/actions/posts";
-import { Post } from "@/types/Post";
-import React, {
+import {
   createContext,
   ReactNode,
   useContext,
@@ -10,11 +8,17 @@ import React, {
   useTransition,
 } from "react";
 
+import { createComment } from "@/actions/comments";
+import { createPost, getAllPosts } from "@/actions/posts";
+
+import { Post } from "@/types/Post";
+
 interface PostsContextType {
   posts: Post[];
   isLoading: boolean;
   handleLoadAllPosts: () => void;
   handleCreatePost: (newPostContent: string) => void;
+  handleCreateComment: (idPost: number, content: string) => void;
 }
 
 export const PostsContext = createContext<PostsContextType | null>(null);
@@ -37,9 +41,22 @@ export default function PostsProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const handleCreateComment = (idPost: number, content: string) => {
+    startTransition(async () => {
+      const { errorMessage } = await createComment(idPost, content);
+      handleLoadAllPosts();
+    });
+  };
+
   return (
     <PostsContext.Provider
-      value={{ posts, isLoading, handleLoadAllPosts, handleCreatePost }}
+      value={{
+        posts,
+        isLoading,
+        handleLoadAllPosts,
+        handleCreatePost,
+        handleCreateComment,
+      }}
     >
       {children}
     </PostsContext.Provider>

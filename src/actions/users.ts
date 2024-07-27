@@ -39,10 +39,23 @@ export const getUser = async () => {
     const supabase = createClient();
     const { data, error } = await supabase.auth.getUser();
 
-    if (error) return { errorMessage: error.message };
+    if (error) return { userErrorMessage: error.message };
 
-    return { errorMessage: null, user: data.user };
+    return { userErrorMessage: null, user: data.user };
   } catch (error) {
-    return { errorMessage: "Error getting user" };
+    return { userErrorMessage: "Error getting user" };
+  }
+};
+
+export const getSession = async () => {
+  try {
+    const supabase = createClient();
+    const { data, error } = await supabase.auth.getSession();
+
+    if (error) return { sessionErrorMessage: error.message };
+
+    return { sessionErrorMessage: null, session: data.session };
+  } catch (error) {
+    return { sessionErrorMessage: "Error getting session" };
   }
 };

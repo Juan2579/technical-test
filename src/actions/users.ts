@@ -13,7 +13,7 @@ export const loginAction = async (provider: Provider) => {
       },
     });
 
-    if (error) throw error;
+    if (error) return { errorMessage: error.message };
 
     return { errorMessage: null, url: data.url };
   } catch (error) {

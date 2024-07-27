@@ -1,15 +1,21 @@
 "use client";
 
 import { MouseEvent, useState, useTransition } from "react";
-import Box from "@mui/material/Box";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import Logout from "@mui/icons-material/Logout";
 import { User } from "@supabase/auth-js";
 import { logoutAction } from "@/actions/users";
+
+import {
+  Box,
+  Menu,
+  MenuItem,
+  ListItemIcon,
+  IconButton,
+  Tooltip,
+} from "@mui/material";
+import Logout from "@mui/icons-material/Logout";
+
+import { enqueueSnackbar } from "notistack";
+
 import { Loader } from "./Loader";
 import { ProfileAvatar } from "./ProfileAvatar";
 
@@ -31,7 +37,7 @@ export default function AccountMenu({ user }: { user: User }) {
       const { errorMessage } = await logoutAction();
 
       if (errorMessage) {
-        console.log(errorMessage);
+        enqueueSnackbar(errorMessage, { variant: "error" });
       }
     });
   };

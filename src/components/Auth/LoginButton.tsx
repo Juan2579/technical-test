@@ -9,6 +9,8 @@ import { Provider } from "@supabase/supabase-js";
 import { Button } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
+import { enqueueSnackbar } from "notistack";
+
 import { Loader } from "../Shared/Loader";
 
 export const LoginButton = () => {
@@ -22,7 +24,7 @@ export const LoginButton = () => {
       if (!errorMessage && url) {
         router.push(url);
       } else {
-        console.error(errorMessage);
+        enqueueSnackbar(errorMessage, { variant: "error" });
       }
     });
   };

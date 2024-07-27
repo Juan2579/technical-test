@@ -42,19 +42,22 @@ export const getAllPosts = async () => {
 };
 
 export const createPost = async (content: string) => {
-  const supabase = createClient();
+  try {
+    const supabase = createClient();
 
-  const user = await supabase.auth.getUser();
+    const user = await supabase.auth.getUser();
 
-  const { data, error } = await supabase
-    .from("posts")
-    .insert([{ content, user_uuid: user.data.user?.id }])
-    .select();
+    const { data, error } = await supabase
+      .from("posts")
+      .insert([{ content, user_uuid: user.data.user?.id }])
+      .select();
 
-  if (error) {
-    console.error("Error creating post:", error);
-    return null;
+    if (error) {
+      return { errorMessage: error.message };
+    }
+
+    return { errorMessage: null };
+  } catch (error) {
+    return { errorMessage: "Error creating post" };
   }
-
-  return data[0];
 };

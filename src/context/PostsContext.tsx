@@ -6,6 +6,7 @@ import { createComment } from "@/actions/comments";
 import { createPost, getAllPosts } from "@/actions/posts";
 
 import { Post } from "@/types/Post";
+import { enqueueSnackbar } from "notistack";
 
 interface PostsContextType {
   posts: Post[];
@@ -25,18 +26,36 @@ export default function PostsProvider({ children }: { children: ReactNode }) {
     const { errorMessage, data } = await getAllPosts();
     setPosts(data as Post[]);
     setIsLoading(false);
+
+    if (errorMessage) enqueueSnackbar(errorMessage, { variant: "error" });
   };
 
   const handleCreatePost = async (newPostContent: string) => {
     setIsLoading(true);
     const { errorMessage } = await createPost(newPostContent);
-    handleLoadAllPosts();
+
+    if (errorMessage) {
+      enqueueSnackbar(errorMessage, { variant: "error" });
+      setIsLoading(false);
+      return;
+    }
+
+    await handleLoadAllPosts();
+    enqueueSnackbar("Post created successfully", { variant: "success" });
   };
 
   const handleCreateComment = async (idPost: number, content: string) => {
     setIsLoading(true);
     const { errorMessage } = await createComment(idPost, content);
-    handleLoadAllPosts();
+
+    if (errorMessage) {
+      enqueueSnackbar(errorMessage, { variant: "error" });
+      setIsLoading(false);
+      return;
+    }
+
+    await handleLoadAllPosts();
+    enqueueSnackbar("Comment created successfully", { variant: "success" });
   };
 
   return (

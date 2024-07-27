@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import PostsProvider from "@/context/PostsContext";
+import SnackbarContext from "@/context/SnackbarContext";
+
 import { Header } from "@/components/Shared/Header";
 
 import "./globals.css";
@@ -22,7 +24,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Header />
-        <PostsProvider>{children}</PostsProvider>
+        <SnackbarContext>
+          <PostsProvider>{children}</PostsProvider>
+        </SnackbarContext>
       </body>
     </html>
   );

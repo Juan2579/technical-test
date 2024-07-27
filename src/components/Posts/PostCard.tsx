@@ -39,7 +39,7 @@ export const PostCard = ({ post, user }: { post: Post; user?: User }) => {
           <img
             src={post.image_url}
             alt={`${post.author.username}'s post image `}
-            className="w-full"
+            className="w-full object-cover"
           />
         )}
         <div className="w-full flex flex-col gap-4 pt-3">

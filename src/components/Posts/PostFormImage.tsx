@@ -22,7 +22,7 @@ export const PostFormImage = ({
         </IconButton>
       </Tooltip>
       <img
-        className="w-full h-full max-h-52"
+        className="w-full h-full max-h-52 object-cover"
         src={`${imageBaseUrl}/${url}`}
         alt="Post Image Preview"
       />

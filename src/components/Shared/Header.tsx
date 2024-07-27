@@ -5,7 +5,7 @@ import { Logo } from "./Logo";
 import AccountMenu from "./AccountMenu";
 
 export const Header = async () => {
-  const { errorMessage, user } = await getUser();
+  const { userErrorMessage, user } = await getUser();
 
   return (
     <header className="w-full shadow-sm p-4 md:p-5">

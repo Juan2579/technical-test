@@ -12,7 +12,7 @@ interface PostsContextType {
   posts: Post[];
   isLoading: boolean;
   handleLoadAllPosts: () => void;
-  handleCreatePost: (newPostContent: string) => void;
+  handleCreatePost: (newPostContent: string, newPostImageUrl: string) => void;
   handleCreateComment: (idPost: number, content: string) => void;
 }
 
@@ -30,9 +30,12 @@ export default function PostsProvider({ children }: { children: ReactNode }) {
     if (errorMessage) enqueueSnackbar(errorMessage, { variant: "error" });
   };
 
-  const handleCreatePost = async (newPostContent: string) => {
+  const handleCreatePost = async (
+    newPostContent: string,
+    newPostImageUrl: string
+  ) => {
     setIsLoading(true);
-    const { errorMessage } = await createPost(newPostContent);
+    const { errorMessage } = await createPost(newPostContent, newPostImageUrl);
 
     if (errorMessage) {
       enqueueSnackbar(errorMessage, { variant: "error" });

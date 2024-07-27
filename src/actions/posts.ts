@@ -20,6 +20,7 @@ export const getAllPosts = async () => {
         content,
         created_at,
         author:profiles(username, avatar_url),
+        image_url,
         comments(
           id,
           content,
@@ -41,7 +42,7 @@ export const getAllPosts = async () => {
   }
 };
 
-export const createPost = async (content: string) => {
+export const createPost = async (content: string, imageUrl: string) => {
   try {
     const supabase = createClient();
 
@@ -49,7 +50,15 @@ export const createPost = async (content: string) => {
 
     const { data, error } = await supabase
       .from("posts")
-      .insert([{ content, user_uuid: user.data.user?.id }])
+      .insert([
+        {
+          content,
+          user_uuid: user.data.user?.id,
+          image_url: imageUrl
+            ? `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/images/${imageUrl}`
+            : "",
+        },
+      ])
       .select();
 
     if (error) {

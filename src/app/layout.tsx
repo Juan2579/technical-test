@@ -6,7 +6,7 @@ import SnackbarContext from "@/context/SnackbarContext";
 
 import { Header } from "@/components/Shared/Header";
 
-import "./globals.css";
+import "./../styles/globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -34,7 +34,14 @@ export const PostCard = ({ post, user }: { post: Post; user?: User }) => {
           <span className="font-bold">{post.author.username}</span>
           <span className="text-sm">{getPostedDate(post.created_at)}</span>
         </div>
-        <span>{post.content}</span>
+        {post.content && <span>{post.content}</span>}
+        {post.image_url && (
+          <img
+            src={post.image_url}
+            alt={`${post.author.username}'s post image `}
+            className="w-full"
+          />
+        )}
         <div className="w-full flex flex-col gap-4 pt-3">
           {user && <CommentForm post={post} user={user} />}
           <div className="w-full flex justify-end">

@@ -1,14 +1,15 @@
-import { getUser } from "@/actions/users";
+import { getSession, getUser } from "@/actions/users";
 
 import { PostForm } from "@/components/Posts/PostForm";
 import { PostsList } from "@/components/Posts/PostsList";
 
 export default async function Home() {
-  const { errorMessage, user } = await getUser();
+  const { userErrorMessage, user } = await getUser();
+  const { sessionErrorMessage, session } = await getSession();
 
   return (
     <main className="w-full mx-auto max-w-xl flex flex-col justify-center items-center shadow-sm border">
-      {user && <PostForm user={user} />}
+      {user && session && <PostForm user={user} session={session} />}
       <PostsList user={user} />
     </main>
   );

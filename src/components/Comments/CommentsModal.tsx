@@ -56,11 +56,9 @@ export const CommentsModal = ({
         </Tooltip>
       </DialogTitle>
       <DialogContent className="p-0" dividers>
-        <DialogContentText>
-          {post.comments.map((comment) => (
-            <CommentCard key={comment.id} comment={comment} />
-          ))}
-        </DialogContentText>
+        {post.comments.map((comment) => (
+          <CommentCard key={comment.id} comment={comment} />
+        ))}
       </DialogContent>
       {user && (
         <DialogActions className="p-6">

@@ -70,7 +70,7 @@ pnpm install
 ```
 2. Create a `.env.local` file in the root of the application with the following environment variables:
 ```bash
-NEXT_PUBLIC_BASE_URL=http://localhost:3000
+NEXT_PUBLIC_LOCAL_URL=http://localhost:3000
 NEXT_PUBLIC_SUPABASE_URL=https://oqzmcoqbdiwvtpgazzhu.supabase.co
 SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9xem1jb3FiZGl3dnRwZ2F6emh1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjE5NDc3MTgsImV4cCI6MjAzNzUyMzcxOH0.wQARGMucJjCWccXcYqvuh4-BnieeHxarmWsBY_YBe3k
 ```

@@ -1,4 +1,6 @@
-.uppy-Dashboard-inner {
-  width: auto !important;
-  height: 25rem !important;
+@media (min-width: 600px) {
+  .uppy-Dashboard-inner {
+    width: auto !important;
+    height: 25rem !important;
+  }
 }

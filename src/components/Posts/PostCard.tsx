@@ -25,24 +25,28 @@ export const PostCard = ({ post, user }: { post: Post; user?: User }) => {
 
   return (
     <div className="w-full flex gap-4 p-6 border">
-      <ProfileAvatar
-        username={post.author.username}
-        avatarUrl={post.author.avatar_url}
-      />
-      <div className="w-full flex flex-col gap-2">
-        <div className="flex items-center gap-2">
-          <span className="font-bold">{post.author.username}</span>
-          <span className="text-sm">{getPostedDate(post.created_at)}</span>
+      <div className="w-full flex flex-col gap-4">
+        <div className="flex gap-4">
+          <ProfileAvatar
+            username={post.author.username}
+            avatarUrl={post.author.avatar_url}
+          />
+          <div className="flex flex-col justify-center gap-2">
+            <div className="flex items-center gap-2">
+              <span className="font-bold">{post.author.username}</span>
+              <span className="text-sm">{getPostedDate(post.created_at)}</span>
+            </div>
+            {post.content && <span className="break-all">{post.content}</span>}
+          </div>
         </div>
-        {post.content && <span>{post.content}</span>}
         {post.image_url && (
           <img
             src={post.image_url}
             alt={`${post.author.username}'s post image `}
-            className="w-full object-cover"
+            className="w-full max-h-80 object-cover"
           />
         )}
-        <div className="w-full flex flex-col gap-4 pt-3">
+        <div className="w-full flex flex-col gap-4">
           {user && <CommentForm post={post} user={user} />}
           <div className="w-full flex justify-end">
             {post.comments.length > 0 ? (

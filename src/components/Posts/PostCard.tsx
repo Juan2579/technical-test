@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Post } from "@/types/Post";
 import { User } from "@supabase/auth-js";
 
@@ -9,7 +10,6 @@ import { getPostedDate } from "@/utils/getPostedDate";
 
 import { ProfileAvatar } from "../Shared/ProfileAvatar";
 import { CommentForm } from "../Comments/CommentForm";
-import { useState } from "react";
 import { CommentsModal } from "../Comments/CommentsModal";
 
 export const PostCard = ({ post, user }: { post: Post; user?: User }) => {

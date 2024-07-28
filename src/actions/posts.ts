@@ -1,12 +1,6 @@
 "use server";
 
-import { Post } from "@/types/Post";
 import { createClient } from "@/utils/supabase/server";
-
-interface GetAllPostsResponse {
-  errorMessage: string | null;
-  data: Post[];
-}
 
 export const getAllPosts = async () => {
   try {

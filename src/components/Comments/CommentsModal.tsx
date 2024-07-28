@@ -1,9 +1,10 @@
+import { Post } from "@/types/Post";
+import { User } from "@supabase/auth-js";
+
 import {
-  Button,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   IconButton,
   Tooltip,
@@ -11,10 +12,9 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { CommentForm } from "./CommentForm";
-import { Post } from "@/types/Post";
-import { User } from "@supabase/auth-js";
 import HighlightOffOutlinedIcon from "@mui/icons-material/HighlightOffOutlined";
+
+import { CommentForm } from "./CommentForm";
 import CommentCard from "./CommentCard";
 
 interface CommentsModalProps {
